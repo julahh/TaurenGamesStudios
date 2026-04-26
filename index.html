@@ -8,14 +8,14 @@
     <style>
       body {
         background: skyblue;
-        color: #AA00AA;
+        color: #aa00aa;
         font-family: Arial, sans-serif;
         text-align: center;
         margin: 0;
       }
 
       header {
-        background: dark_green;
+        background: darkgreen;
         color: white;
         padding: 40px 20px;
       }
@@ -29,21 +29,36 @@
       }
 
       .games-section {
-        background: #00AAAA;
+        background: #00aaaa;
+      }
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 400px));
+        gap: 24px;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 900px;
+        margin: 20px auto 0;
       }
 
       .game-card {
-        background: ##55FF55;
-        max-width: 400px;
-        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #55ff55;
         padding: 20px;
         border-radius: 8px;
+      }
+
+      .game-card p {
+        flex: 1;
       }
 
       a {
         display: inline-block;
         background: gold;
-        color: dark_blue;
+        color: darkblue;
         padding: 12px 18px;
         border-radius: 8px;
         text-decoration: none;
@@ -53,6 +68,12 @@
       footer {
         padding: 25px;
         font-weight: bold;
+      }
+
+      @media (max-width: 760px) {
+        .games-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -65,16 +86,32 @@
 
     <section class="games-section">
       <h2>Games Centre</h2>
-      <p>Enjoy endless gameplay! More games coming this summer 2026.</p>
+      <p>Take a break and enjoy some endless gameplay! More games coming this summer 2026.</p>
 
-      <div class="game-card">
-        <h3>Clucky Skies</h3>
-        <p>Tap, dodge, and beat your best score. 
-        (For web browsers, press the spacebar to tap. A & D for left and right movement).</p>
+      <div class="games-grid">
+        <div class="game-card">
+          <h3>Clucky Skies</h3>
+          <p>
+            Tap, dodge, and try to top your best score.
+            For web browsers, press the spacebar to tap. A and D move left and right.
+          </p>
 
-        <a href="https://julahh.github.io/Cluckie-Skies/">
-          Play Clucky Skies
-        </a>
+          <a href="https://julahh.github.io/Cluckie-Skies/">
+            Play Clucky Skies
+          </a>
+        </div>
+
+        <div class="game-card">
+          <h3>Sprinkled Cupcakes</h3>
+          <p>
+            Tap/Click all the sprinkled cupcakes on the bakery counter before they're gone!
+
+          </p>
+
+          <a href="https://julahh.github.io/Sprinkled-Cupcakes/">
+            Play Sprinkled Cupcakes
+          </a>
+        </div>
       </div>
     </section>
 
