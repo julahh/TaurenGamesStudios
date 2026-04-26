@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
   <head>
@@ -10,10 +11,33 @@
         color: #222;
         font-family: Arial, sans-serif;
         text-align: center;
+        margin: 0;
+      }
+
+      header {
+        background: #1f6f9f;
+        color: white;
+        padding: 40px 20px;
       }
 
       h1 {
-        color: white;
+        margin: 0;
+      }
+
+      section {
+        padding: 35px 20px;
+      }
+
+      .games-section {
+        background: white;
+      }
+
+      .game-card {
+        background: #eaf7ff;
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 8px;
       }
 
       a {
@@ -25,19 +49,36 @@
         text-decoration: none;
         font-weight: bold;
       }
+
+      footer {
+        padding: 25px;
+        font-weight: bold;
+      }
     </style>
   </head>
 
-    <h1>Tauren Games Studios</h1>
-    <p>Games for: IOS. Android and The Web.</p>
-  
   <body>
-    <h1>Games Centre</h1>
-    <p>Enjoy endless gameplay!</p>
+    <header>
+      <h1>Tauren Games Studios</h1>
+      <p>Games for iOS, Android, and the Web.</p>
+    </header>
 
-    <a href="https://julahh.github.io/Cluckie-Skies/">
-      Play Clucky Skies
-    </a>
+    <section class="games-section">
+      <h2>Games Centre</h2>
+      <p>Enjoy endless gameplay!</p>
+
+      <div class="game-card">
+        <h3>Clucky Skies</h3>
+        <p>Fly, dodge, and chase your best score.</p>
+
+        <a href="https://julahh.github.io/Cluckie-Skies/">
+          Play Clucky Skies
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <h2>--- Under Construction ---</h2>
+    </footer>
   </body>
-  <h2>---Under Construction---</h2>
 </html>
