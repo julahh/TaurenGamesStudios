@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tauren Games Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FFF8F0;
+      --peach: #FFD9B5;
+      --orange: #FF8C42;
+      --warm-brown: #7B4D2E;
+      --soft-brown: #C4834A;
+      --gold: #F5A623;
+      --sage: #A8C5A0;
+      --lavender: #D4BAED;
+      --sky: #B8E0F7;
+      --text-dark: #3D2010;
+      --text-mid: #7B4D2E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── BUBBLES BG ── */
+    .bubbles-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+      animation: floatBubble linear infinite;
+    }
+    @keyframes floatBubble {
+      0%   { transform: translateY(110vh) scale(1);   opacity: 0.18; }
+      80%  { opacity: 0.18; }
+      100% { transform: translateY(-20vh) scale(1.1); opacity: 0; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(255,248,240,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--peach);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 1.55rem;
+      color: var(--warm-brown);
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(255,140,66,0.35);
+      animation: bounceLogo 2.5s ease-in-out infinite;
+    }
+    @keyframes bounceLogo {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-5px); }
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 6px 16px;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background: var(--peach); color: var(--warm-brown); }
+    .nav-cta {
+      background: var(--orange) !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(255,140,66,0.3);
+    }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 6px;
+    }
+    .nav-toggle span {
+      display: block; width: 24px; height: 2.5px;
+      background: var(--warm-brown); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 5.5rem 2rem 2.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--peach); color: var(--soft-brown);
+      font-weight: 700; font-size: 0.8rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 999px;
+      margin-bottom: 1.5rem;
+      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero h1 {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.1; color: var(--warm-brown);
+      margin-bottom: 1.2rem;
+      animation: popIn 0.6s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero h1 span {
+      color: var(--orange);
+      display: inline-block;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+    @keyframes wiggle {
+      0%,100% { transform: rotate(-2deg); }
+      50%      { transform: rotate(2deg); }
+    }
+    .hero p {
+      font-size: 1.1rem; color: var(--text-mid);
+      max-width: 520px; margin: 0 auto 2.5rem;
+      line-height: 1.75;
+      animation: popIn 0.6s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: popIn 0.6s 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .hero-deco {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin-top: 3rem; flex-wrap: wrap;
+      animation: popIn 0.7s 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .deco-bubble {
+      width: 80px; height: 80px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 8px 24px rgba(180,100,40,0.12);
+      animation: floatDeco ease-in-out infinite;
+    }
+    .deco-bubble:nth-child(1) { background: var(--sky);     animation-duration: 3s;   animation-delay: 0s;   }
+    .deco-bubble:nth-child(2) { background: var(--peach);   animation-duration: 3.5s; animation-delay: 0.3s; }
+    .deco-bubble:nth-child(3) { background: var(--sage);    animation-duration: 3.2s; animation-delay: 0.6s; }
+    .deco-bubble:nth-child(4) { background: var(--lavender);animation-duration: 2.8s; animation-delay: 0.9s; }
+    .deco-bubble:nth-child(5) { background: var(--peach);   animation-duration: 3.6s; animation-delay: 0.4s; }
+    @keyframes floatDeco {
+      0%,100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: var(--orange); color: white;
+      border: none; padding: 0.85rem 2rem;
+      border-radius: 999px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255,140,66,0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 28px rgba(255,140,66,0.45); }
+    .btn-primary:active { transform: scale(0.97); }
+    .btn-secondary {
+      background: white; color: var(--warm-brown);
+      border: 2.5px solid var(--peach);
+      padding: 0.85rem 2rem; border-radius: 999px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-secondary:hover { transform: translateY(-3px); border-color: var(--orange); }
+
+    /* ── WAVE DIVIDER ── */
+    .wave { display: block; width: 100%; overflow: hidden; line-height: 0; position: relative; z-index: 2; }
+    .wave svg { display: block; }
+
+    /* ── STATS ── */
+    .stats-strip {
+      position: relative; z-index: 2;
+      background: var(--orange);
+      padding: 2.2rem 2rem;
+    }
+    .stats-inner {
+      max-width: 860px; margin: 0 auto;
+      display: flex; gap: 2rem;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; color: white; min-width: 130px; }
+    .stat-num {
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.5rem; font-weight: 800; line-height: 1;
+    }
+    .stat-label { font-size: 0.88rem; opacity: 0.88; margin-top: 4px; }
+
+    /* ── SECTION ── */
+    section {
+      position: relative; z-index: 2;
+      padding: 3.5rem 2rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .section-title {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 2rem;
+      color: var(--warm-brown);
+      text-align: center; margin-bottom: 0.4rem;
+    }
+    .section-sub {
+      text-align: center; color: var(--soft-brown);
+      margin-bottom: 2.5rem; font-size: 1rem;
+    }
+
+    /* ── GAMES GRID ── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .game-card {
+      background: white; border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(180,100,40,0.12);
+      border: 2px solid var(--peach);
+      transition: transform 0.22s, box-shadow 0.22s;
+      cursor: pointer;
+    }
+    .game-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 16px 44px rgba(180,100,40,0.2);
+    }
+    .game-thumb {
+      width: 100%; height: 130px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; position: relative; overflow: hidden;
+    }
+    .game-thumb::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
+      background: linear-gradient(transparent, white);
+    }
+    .game-body { padding: 1rem 1.2rem 1.2rem; }
+    .game-tag {
+      display: inline-block; font-size: 0.72rem;
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px; border-radius: 999px;
+      margin-bottom: 0.5rem;
+    }
+    .tag-action    { background: #FFE3C8; color: #B05A1A; }
+    .tag-puzzle    { background: #D4EAFF; color: #2563A0; }
+    .tag-rpg       { background: #E8D4F0; color: #6B34A0; }
+    .tag-adventure { background: #D4F0E0; color: #1A7A46; }
+    .tag-casual    { background: #FFF0C0; color: #9A6B00; }
+    .game-title {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--text-dark); margin-bottom: 0.3rem;
+    }
+    .game-desc {
+      font-size: 0.83rem; color: var(--text-mid);
+      line-height: 1.5; margin-bottom: 0.9rem;
+    }
+    .game-footer { display: flex; align-items: center; justify-content: space-between; }
+    .stars { color: var(--gold); font-size: 0.85rem; }
+    .btn-play {
+      background: var(--orange); color: white;
+      border: none; padding: 6px 16px; border-radius: 999px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700; font-size: 0.82rem;
+      cursor: pointer; transition: transform 0.15s;
+    }
+    .btn-play:hover { transform: scale(1.08); }
+
+    /* ── ABOUT ── */
+    .about-wrap {
+      display: flex; gap: 3rem; align-items: center; flex-wrap: wrap;
+    }
+    .about-visual {
+      flex: 0 0 280px;
+      background: linear-gradient(135deg, var(--peach) 0%, #FFB347 100%);
+      border-radius: 32px;
+      height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      box-shadow: 0 12px 40px rgba(255,140,66,0.25);
+      animation: floatDeco 4s ease-in-out infinite;
+    }
+    .about-text { flex: 1; min-width: 260px; }
+    .about-text h2 {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 800; font-size: 1.9rem;
+      color: var(--warm-brown); margin-bottom: 1rem;
+    }
+    .about-text p {
+      color: var(--text-mid); line-height: 1.75;
+      margin-bottom: 1rem; font-size: 0.97rem;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      position: relative; z-index: 2;
+      background: var(--peach);
+      border-top: 2px solid #FFCB8A;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .newsletter h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.9rem; font-weight: 800;
+      color: var(--warm-brown); margin-bottom: 0.5rem;
+    }
+    .newsletter p { color: var(--soft-brown); margin-bottom: 1.5rem; }
+    .email-row {
+      display: flex; gap: 0.75rem;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .email-input {
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      border: 2px solid white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem; width: 280px;
+      outline: none; background: white;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(180,100,40,0.1);
+    }
+    .email-input:focus { border-color: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 2;
+      background: var(--warm-brown);
+      color: rgba(255,248,240,0.8);
+      padding: 2.5rem 2rem 1.5rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--peach); margin-bottom: 0.4rem;
+    }
+    .footer-links {
+      display: flex; gap: 1.5rem;
+      justify-content: center; flex-wrap: wrap;
+      margin: 1rem 0; list-style: none;
+    }
+    .footer-links a {
+      color: rgba(255,220,180,0.75);
+      text-decoration: none; font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--peach); }
+    .social-row {
+      display: flex; gap: 0.75rem;
+      justify-content: center; margin: 1rem 0;
+    }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,240,220,0.12);
+      border: 1.5px solid rgba(255,220,180,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--peach); cursor: pointer;
+      transition: background 0.2s; font-size: 1.1rem;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: rgba(255,240,220,0.25); }
+    .footer-copy {
+      font-size: 0.8rem; opacity: 0.5; margin-top: 1rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.8) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; flex-direction: column; gap: 0.5rem; position: absolute; top: 70px; left: 0; right: 0; background: rgba(255,248,240,0.97); padding: 1.5rem 2rem; border-bottom: 2px solid var(--peach); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .hero { padding: 3rem 1.5rem 2rem; }
+      .about-visual { flex: 0 0 100%; height: 200px; font-size: 5rem; }
+      section { padding: 2.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating bubbles -->
+  <div class="bubbles-bg" id="bubblesContainer" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#" aria-label="Tauren Game Studios home">
+      <div class="logo-icon" aria-hidden="true">🐂</div>
+      Tauren Games Studios
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#games">Games</a></li>
+      <li><a href="#about">Studio</a></li>
+      <li><a href="#games" class="nav-cta">Play Free ✦</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">🎮 New release out now!</div>
+    <h1>Games made with<br><span>heart &amp; soul</span> 🧡</h1>
+    <p>Tauren Game Studios crafts worlds you'll want to come back and visit — from cozy puzzles to epic adventures, there'll be something for every kind of everyone.</p>
+    <div class="hero-btns">
+      <a href="#games" class="btn-primary">🎲 Browse All Games</a>
+      <a href="#about" class="btn-secondary">📖 Our Story</a>
+    </div>
+    <div class="hero-deco" aria-hidden="true">
+      <div class="deco-bubble">⚔️</div>
+      <div class="deco-bubble">🧩</div>
+      <div class="deco-bubble">🌿</div>
+      <div class="deco-bubble">🔮</div>
+      <div class="deco-bubble">🏆</div>
+    </div>
+  </header>
+
+  <!-- WAVE TOP -->
+  <div class="wave">
+    <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" height="60" aria-hidden="true">
+      <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#FF8C42"/>
+    </svg>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Games released</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2M+</div>
+        <div class="stat-label">Players worldwide</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4.8 ★</div>
+        <div class="stat-label">Avg. player rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">7yr</div>
+        <div class="stat-label">Making games</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAVE BOTTOM -->
+  <div class="wave">
+    <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" height="60" aria-hidden="true">
+      <path d="M0,30 C300,0 600,60 900,30 C1050,15 1150,40 1200,30 L1200,0 L0,0 Z" fill="#FF8C42"/>
+    </svg>
+  </div>
+
+  <!-- GAMES -->
+  <section id="games">
+    <div class="section-title reveal">🎮 Our Games</div>
+    <div class="section-sub reveal">A little something for every kind of player</div>
+    <div class="games-grid">
+
+      <article class="game-card reveal">
+        <div class="game-thumb" style="background: linear-gradient(135deg,#C8F0FF,#A0D8F8);">🐣</div>
+        <div class="game-body">
+          <span class="game-tag tag-casual">Casual</span>
+          <div class="game-title">Cluckie Skies</div>
+          <div class="game-desc">Take to the skies in this cheerful, feathery adventure — flap your way through the clouds!</div>
+          <div class="game-footer">
+            <span class="stars">★★★★★</span>
+            <button class="btn-play" data-url="https://julahh.github.io/Cluckie-Skies/">▶ Play</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="game-card reveal">
+        <div class="game-thumb" style="background: linear-gradient(135deg,#FFE5F0,#FFBBD8);">🍪</div>
+        <div class="game-body">
+          <span class="game-tag tag-puzzle">Puzzle</span>
+          <div class="game-title">Christmas Cookie Jar Pachinko</div>
+          <div class="game-desc">Drop festive cookies through a jolly pachinko board — a cozy holiday treat for all ages!</div>
+          <div class="game-footer">
+            <span class="stars">★★★★★</span>
+            <button class="btn-play" data-url="https://julahh.github.io/christmas-cookie-jar-pachinko/">▶ Play</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="game-card reveal">
+        <div class="game-thumb" style="background: linear-gradient(135deg,#FFF0C8,#FFD580);">🧁</div>
+        <div class="game-body">
+          <span class="game-tag tag-casual">Casual</span>
+          <div class="game-title">Sprinkled Cupcakes</div>
+          <div class="game-desc">Decorate delicious cupcakes with mountains of sprinkles in this sweet and satisfying game!</div>
+          <div class="game-footer">
+            <span class="stars">★★★★★</span>
+            <button class="btn-play" data-url="https://julahh.github.io/sprinkled-cupcakes/">▶ Play</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="background: linear-gradient(135deg, #FFF8F0 0%, #FFF0DC 100%); max-width: 100%; padding: 4rem 2rem;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div class="about-wrap">
+        <div class="about-visual reveal" aria-hidden="true">🐂</div>
+        <div class="about-text">
+          <h2 class="reveal">We're Tauren Games Studios 🧡</h2>
+          <p class="reveal">We're a passionate indie studio that believes every game should feel like a warm hug. Since 2026, we've been building worlds packed with personality, charm, and genuine heart.</p>
+          <p class="reveal">Our games are made for everyone — whether you have five minutes or five hours to spare.</p>
+          <a href="#games" class="btn-primary reveal" style="margin-top: 0.5rem;">Check out our games ✦</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🐂 Tauren Games Studios</div>
+    <div style="font-size:0.85rem; opacity:0.7; margin-bottom:0.5rem;">Making games with heart since 2026</div>
+    <div class="social-row">
+      <a href="#" class="social-btn" aria-label="Twitter"><i class="ti ti-brand-twitter" aria-hidden="true"></i></a>
+      <a href="#" class="social-btn" aria-label="Instagram"><i class="ti ti-brand-instagram" aria-hidden="true"></i></a>
+      <a href="#" class="social-btn" aria-label="Discord"><i class="ti ti-brand-discord" aria-hidden="true"></i></a>
+      <a href="#" class="social-btn" aria-label="YouTube"><i class="ti ti-brand-youtube" aria-hidden="true"></i></a>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#games">Games</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Tauren Games Studios. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Floating background bubbles
+    (function() {
+      const container = document.getElementById('bubblesContainer');
+      const colors = ['#FFD9B5','#FFB347','#A8C5A0','#D4BAED','#B8E0F7','#FFF0C0'];
+      for (let i = 0; i < 20; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = 28 + Math.random() * 80;
+        b.style.cssText = [
+          'width:' + size + 'px',
+          'height:' + size + 'px',
+          'left:' + Math.random() * 100 + '%',
+          'bottom:' + (-20 - Math.random() * 20) + '%',
+          'background:' + colors[Math.floor(Math.random() * colors.length)],
+          'animation-duration:' + (8 + Math.random() * 14) + 's',
+          'animation-delay:' + Math.random() * 12 + 's'
+        ].join(';');
+        container.appendChild(b);
+      }
+    })();
+
+    // Mobile nav toggle
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', function() {
+      const open = navLinks.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el) { observer.observe(el); });
+
+    // Play button interaction
+    document.querySelectorAll('.btn-play').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        window.open(this.dataset.url, '_blank');
+      });
+    });
+  </script>
+
+</body>
+</html>
